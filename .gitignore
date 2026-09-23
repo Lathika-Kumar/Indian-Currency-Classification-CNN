@@ -6,7 +6,6 @@ __pycache__/
 *.pth
 *.pt
 *.pkl
-.gradio/
 dataset/
 *.zip
 .env

@@ -5,8 +5,8 @@
 
 [![PyTorch](https://img.shields.io/badge/Framework-PyTorch%202.0-ee4c2c.svg?style=for-the-badge&logo=pytorch)](https://pytorch.org/)
 [![Gradio](https://img.shields.io/badge/Deployment-Gradio%20Live-orange?style=for-the-badge&logo=gradio)](https://9d30c4418ea63f9be5.gradio.live/)
-[![Accuracy](https://img.shields.io/badge/Champion%20Accuracy-97.77%25-brightgreen?style=for-the-badge)](https://github.com/)
-[![Precision](https://img.shields.io/badge/Champion%20Precision-97.93%25-blue?style=for-the-badge)](https://github.com/)
+[![Accuracy](https://img.shields.io/badge/Champion%20Accuracy-97.77%25-brightgreen?style=for-the-badge)](https://github.com/Lathika-Kumar/Indian-Currency-Classification-CNN)
+[![Precision](https://img.shields.io/badge/Champion%20Precision-97.93%25-blue?style=for-the-badge)](https://github.com/Lathika-Kumar/Indian-Currency-Classification-CNN)
 
 <br>
 
@@ -96,11 +96,12 @@ This implementation covers core topics across all four units of the neural netwo
 ## 🛠️ 5. Project Structure
 
 ```text
+D:\Projects\Indian_Currency_Classification
 ├── README.md                          # Comprehensive project documentation
 ├── app.py                             # Gradio web application deployment script
 ├── requirements.txt                   # Environment dependencies
 ├── .gitignore                         # Excludes checkpoints and heavy assets
-└── Currency_Note_Classification.ipynb # Complete end-to-end Google Colab notebook
+└── currency_classifier.pkl            # Trained model package (download from Colab)
 ```
 
 ---
@@ -110,22 +111,21 @@ This implementation covers core topics across all four units of the neural netwo
 ### Prerequisites
 Make sure you have Python 3.9+ installed.
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/<YOUR_USERNAME>/Indian-Currency-Classification.git
-cd Indian-Currency-Classification
+### 1. Navigate to the Directory
+```powershell
+cd "D:\Projects\Indian_Currency_Classification"
 ```
 
 ### 2. Install Dependencies
-```bash
+```powershell
 pip install -r requirements.txt
 ```
 
 ### 3. Launch the Web Application
-```bash
+```powershell
 python app.py
 ```
-Open your browser at `http://127.0.0.1:7860` to use the classifier locally, or use the generated public link to share.
+Open your browser at `http://127.0.0.1:7860` to use the classifier locally.
 
 ---
 
