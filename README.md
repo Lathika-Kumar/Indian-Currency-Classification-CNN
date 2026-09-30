@@ -10,8 +10,6 @@
 
 <br>
 
-### 🚀 **[Click Here to Test the Live Web App Demo](https://9d30c4418ea63f9be5.gradio.live/)**
-*Upload any Indian currency note photo to get real-time denomination detection & confidence scores.*
 
 </div>
 
