@@ -120,10 +120,19 @@ pip install -r requirements.txt
 ```
 
 ### 3. Launch the Web Application
+You can run either the **Streamlit** app or the **Gradio** app:
+
+**To run the Streamlit App (Recommended):**
+```powershell
+streamlit run streamlit_app.py
+```
+Open your browser at `http://localhost:8501`.
+
+**To run the Gradio App:**
 ```powershell
 python app.py
 ```
-Open your browser at `http://127.0.0.1:7860` to use the classifier locally.
+Open your browser at `http://127.0.0.1:7860`.
 
 ---
 
