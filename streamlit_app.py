@@ -93,23 +93,50 @@ DENOMINATION_INFO = {
 # Device Selection
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# Model release download URL for Streamlit Cloud
+MODEL_RELEASE_URL = "https://github.com/Lathika-Kumar/Indian-Currency-Classification-CNN/releases/download/v1.0.0/currency_classifier.pkl"
+
 # Load Model with Streamlit Resource Caching
-@st.cache_resource(show_spinner="Loading Champion Oxford VGG16 weights...")
+@st.cache_resource(show_spinner=False)
 def load_classifier():
     model_path = os.path.join(os.path.dirname(__file__), "currency_classifier.pkl")
-    if not os.path.exists(model_path):
-        st.error(f"Model file '{model_path}' not found! Please place 'currency_classifier.pkl' in the project directory.")
-        return None, None
     
-    with open(model_path, "rb") as f:
-        package = pickle.load(f)
+    # If model is not found locally (e.g. on Streamlit Cloud), auto-download it from GitHub Releases
+    if not os.path.exists(model_path) or os.path.getsize(model_path) < 1000000:
+        download_container = st.empty()
+        download_container.info("⏳ Downloading trained model weights (537 MB) from GitHub Releases... This only runs once (~15-20s).")
+        progress_bar = st.progress(0, text="Connecting to model host...")
         
-    model = package['model']
-    class_names = package['class_names']
+        def dl_progress(block_num, block_size, total_size):
+            if total_size > 0:
+                fraction = min(1.0, (block_num * block_size) / total_size)
+                progress_bar.progress(fraction, text=f"Downloading Oxford VGG16: {int(fraction * 100)}% ({int(block_num * block_size / (1024*1024))} MB / {int(total_size / (1024*1024))} MB)")
+        
+        import urllib.request
+        try:
+            urllib.request.urlretrieve(MODEL_RELEASE_URL, model_path, reporthook=dl_progress)
+            progress_bar.empty()
+            download_container.success("✅ Model weights downloaded and cached successfully!")
+        except Exception as e:
+            progress_bar.empty()
+            download_container.error(
+                f"⚠️ Model file '{model_path}' is missing on the server and could not be auto-downloaded from:\n"
+                f"{MODEL_RELEASE_URL}\n\n"
+                f"Error details: {e}\n\n"
+                f"👉 Please attach 'currency_classifier.pkl' to your GitHub Release under tag 'v1.0.0'."
+            )
+            return None, None
     
-    model.to(device)
-    model.eval()
-    return model, class_names
+    with st.spinner("Initializing Oxford VGG16 neural network in memory..."):
+        with open(model_path, "rb") as f:
+            package = pickle.load(f)
+            
+        model = package['model']
+        class_names = package['class_names']
+        
+        model.to(device)
+        model.eval()
+        return model, class_names
 
 model, class_names = load_classifier()
 
